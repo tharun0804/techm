@@ -2,18 +2,18 @@ package com.aits.mobileprepaid.security;
 
 import java.util.Date;
 import javax.crypto.SecretKey;
- 
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
- 
+
 @Component
 public class JwtUtil {
- 
+
     private static final String SECRET = "mySecretKeymySecretKeymySecretKeymySecretKey"; // at least 32 chars
     private static final SecretKey SECRET_KEY = Keys.hmacShaKeyFor(SECRET.getBytes());
- 
+
     // 🔹 Generate JWT Token
     public String generateToken(String username) {
         return Jwts.builder()
@@ -23,7 +23,7 @@ public class JwtUtil {
             .signWith(SECRET_KEY)
             .compact();
     }
- 
+
     // 🔹 Validate JWT Token
     public boolean validateToken(String token) {
         try {
@@ -36,7 +36,7 @@ public class JwtUtil {
             return false;
         }
     }
- 
+
     // 🔹 Extract Username from Token
     public String extractUsername(String token) {
         Claims claims = Jwts.parser()
@@ -47,5 +47,3 @@ public class JwtUtil {
         return claims.getSubject();
     }
 }
- 
- 

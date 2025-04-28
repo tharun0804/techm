@@ -1,19 +1,19 @@
-package com.aits.mobileprepaid.security;
+	package com.aits.mobileprepaid.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
- 
+
 import com.aits.mobileprepaid.repo.UserRepository;
- 
+
 @Service
 	public class CustomUserDetailsService implements UserDetailsService {
- 
+
 	    @Autowired
 	    private UserRepository userRepository;
- 
+
 	    @Override
 	    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 	        var user = userRepository.findByEmail(email)
@@ -21,4 +21,3 @@ import com.aits.mobileprepaid.repo.UserRepository;
 	        return new CustomUserDetails(user);
 	    }
 	}
- 
